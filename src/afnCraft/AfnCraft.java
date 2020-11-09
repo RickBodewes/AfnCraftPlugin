@@ -23,38 +23,42 @@ public class AfnCraft extends JavaPlugin {
 	@SuppressWarnings("static-access")
 	@Override
 	public void onEnable() {
-		loadConfig();
-		
+//setting the instance for other classes to use
 		instance = this;
 		
-		//connecting to the database
+		//loading config
+		loadConfig();
+		
+		//setting up database connection
 		this.SQL = new MySQL();
 		this.SQL.init();
 		
+		//setting up the database handler
 		this.SQLHandler = new SQLHandler(this);
-		this.SQLHandler.init();
 		
+		//checking if SQL connection is present
 		if(SQL.isConnected()) {
+			//initializing SQL handler
+			this.SQLHandler.init();
+			
 			//initializing all custom mob spawns
 			SpawnManager.init();
 		}
-		//registering custom spawn location command
-		getCommand("setspawnlocation").setExecutor(new SetSpawnLocation());
-		getCommand("resetpawnlocations").setExecutor(new ResetSpawnLocs());
 		
-		//initializing all custom items
+		//initializing all custom objects
 		ItemManager.init();
 		
-		//registering wither rod events and commands
+		//registering all commands
+		getCommand("setspawnlocation").setExecutor(new SetSpawnLocation());
+		getCommand("resetpawnlocations").setExecutor(new ResetSpawnLocs());
 		getCommand("givecustomweapon").setExecutor(new GiveCustomWeapon());
-		getServer().getPluginManager().registerEvents(new WitherRod(), this);
-		
-		//registering custom mob spawn commands
 		getCommand("spawncustom").setExecutor(new SpawnCustom());
 		
-		//change mob healthbars
+		//registering all events
+		getServer().getPluginManager().registerEvents(new WitherRod(), this);
 		getServer().getPluginManager().registerEvents(new MobHealthBars(), this);
 		
+		//if everything went well, say that plugin has started succesfully
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "AfnCraft plugin has been enabled");
 	}
 	
