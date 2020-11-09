@@ -1,0 +1,33 @@
+name: AfnCraft
+author: Rick
+version: 0.1.0
+main: afnCraft.AfnCraft
+api-version: 1.16
+description: Custom plugin for added functionality to the animecraft server
+commands:
+    givecustomweapon:
+        permission: givecustomweapon
+        description: Gives player the Wither Rod
+        usage: /<command>
+    spawncustom:
+        permission: spawncustom
+        description: Summons a custom mob
+        usage: /<command>
+    setspawnlocation:
+        permission: setspawnlocation
+        description: Sets spawn location for a custom mob
+        usage: /<command> [interval in seconds] [mob to spawn]
+    resetpawnlocations:
+        permission: setspawnlocation
+        description: resets all spawn locations
+        usage: /<command>
+permissions:
+    givecustomweapon:
+        description: allows people to use givecustomweapon
+        default: op
+    spawncustom:
+        description: allows people to use spawncustom
+        default: op
+    setspawnlocation:
+        description: allows people to use setspawnlocation
+        default: op
